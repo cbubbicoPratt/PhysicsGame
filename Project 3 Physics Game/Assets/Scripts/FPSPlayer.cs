@@ -29,6 +29,8 @@ public class FPSPlayer: MonoBehaviour
     public bool isGrounded;
     public Transform groundCheck;
 
+    public ObjectGrabber grabber;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -98,6 +100,7 @@ public class FPSPlayer: MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
+        if (grabber.BroadcastRotate()) return;
         //taking our input from our mouse and storing inside this variable which gets passed into our CameraLook function
         lookInput = context.ReadValue<Vector2>();
     }

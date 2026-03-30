@@ -19,13 +19,34 @@ public class ObjectGrabber : MonoBehaviour
     private Rigidbody heldObject;
     private bool isHolding = false;
 
-    private InteractableObject currentHighlight;
+    private bool rotating = false;
 
+    private Vector2 lookInput;
+    private float lookSensitivity;
+
+    private float objectYaw;
+    private float objectPitch;
+
+    private InteractableObject currentHighlight;
+    private void Awake()
+    {
+        lookSensitivity = GameObject.FindGameObjectWithTag("Player").GetComponent<FPSPlayer>().lookSensitivity;
+    }
     private void FixedUpdate()
     {
         //fixedUpdate runs on an interval schedule
         //we move held object here; stays smooth, physics accurate
-        if(isHolding && heldObject != null) MoveHeldObject();
+        if (isHolding && heldObject != null)
+        {
+            MoveHeldObject();
+            ObjectRotate();
+            //RotateHeldObject();
+            if (!rotating)
+            {
+                heldObject.angularVelocity = Vector3.zero;
+                heldObject.freezeRotation = true;
+            }
+        }
     }
 
     
@@ -82,13 +103,25 @@ public class ObjectGrabber : MonoBehaviour
     {
         Vector3 targetPos = holdPoint.position;
         Vector3 currentPos = heldObject.position;
+        
 
         //smoothly interpolate towards held point
         //move position respects physics collision (wont clip)
         Vector3 newPos = Vector3.Lerp(currentPos, targetPos, holdSmoothing * Time.fixedDeltaTime);
 
         heldObject.MovePosition(newPos);
+        
     }
+
+    //only called when we interact with an object so it only rotates once
+    //void RotateHeldObject()
+    //{
+    //    Quaternion targetRotate = holdPoint.rotation;
+    //    Quaternion currentRotate = heldObject.rotation;
+    //    Quaternion newRotate = Quaternion.Lerp(currentRotate, targetRotate, holdSmoothing * Time.fixedDeltaTime);
+    //    heldObject.MoveRotation(newRotate);
+    //    objectRotated = true;
+    //}
 
     //drop
     //releases object and resumes physics
@@ -128,11 +161,52 @@ public class ObjectGrabber : MonoBehaviour
     {
         if (isHolding) DropObject();
         else TryGrab();
+
     }
 
     public void OnThrowPerformed(InputAction.CallbackContext context)
     {
         if (isHolding) ThrowObject();
+    }
+
+    public void OnToggleRotate(InputAction.CallbackContext context)
+    {
+        if (heldObject != null && context.performed)
+        {
+            rotating = true;
+            heldObject.freezeRotation = false;
+        }
+        else rotating = false;
+    }
+
+    public void OnRotate(InputAction.CallbackContext context)
+    {
+        if (rotating) lookInput = context.ReadValue<Vector2>();
+    }
+
+    public bool BroadcastRotate()
+    {
+        return rotating;
+    }
+
+    void ObjectRotate()
+    {
+        if(heldObject == null) return;
+
+        float mouseX = lookInput.x * lookSensitivity * Time.deltaTime;
+        float mouseY = lookInput.y * lookSensitivity * Time.deltaTime;
+
+        objectYaw += mouseX;
+
+        objectPitch -= mouseY;
+
+        heldObject.rotation = Quaternion.Euler(objectPitch, objectYaw, 0);
+
+        if (!rotating)
+        {
+            heldObject.freezeRotation = true;
+            heldObject.angularVelocity = Vector3.zero;
+        }
     }
 
     void UpdateHighlight()
@@ -144,13 +218,13 @@ public class ObjectGrabber : MonoBehaviour
         RaycastHit hit;
         Debug.DrawRay(transform.position, transform.forward * grabRange, Color.red);
 
-        if(Physics.Raycast(ray, out hit, grabRange)) 
+        if (Physics.Raycast(ray, out hit, grabRange))
         {
             InteractableObject interactable = hit.collider.GetComponent<InteractableObject>();
-            if(interactable != null)
+            if (interactable != null)
             {
                 //unhighlight old object if looking at new one
-                if(currentHighlight != null && currentHighlight != interactable)
+                if (currentHighlight != null && currentHighlight != interactable)
                 {
                     currentHighlight.UnHighlight();
                     Debug.Log("unhighlighted");
@@ -158,16 +232,17 @@ public class ObjectGrabber : MonoBehaviour
 
                 //highlight the new obj
                 interactable.Highlight();
+                Debug.Log("highlighted");
                 currentHighlight = interactable;
                 return;
             }
-
+        }
             //raycast hits nothing interactable clear highlight
             if(currentHighlight != null)
             {
                 currentHighlight.UnHighlight();
+                Debug.Log("unhighlighted");
                 currentHighlight = null;
             }
-        }
     }
 }
