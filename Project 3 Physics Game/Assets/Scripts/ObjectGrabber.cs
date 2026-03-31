@@ -22,16 +22,12 @@ public class ObjectGrabber : MonoBehaviour
     private bool rotating = false;
 
     private Vector2 lookInput;
-    private float lookSensitivity;
+    private float rotateSensitivity;
 
     private float objectYaw;
     private float objectPitch;
 
     private InteractableObject currentHighlight;
-    private void Awake()
-    {
-        lookSensitivity = GameObject.FindGameObjectWithTag("Player").GetComponent<FPSPlayer>().lookSensitivity;
-    }
     private void FixedUpdate()
     {
         //fixedUpdate runs on an interval schedule
@@ -41,11 +37,6 @@ public class ObjectGrabber : MonoBehaviour
             MoveHeldObject();
             ObjectRotate();
             //RotateHeldObject();
-            if (!rotating)
-            {
-                heldObject.angularVelocity = Vector3.zero;
-                heldObject.freezeRotation = true;
-            }
         }
     }
 
@@ -91,7 +82,7 @@ public class ObjectGrabber : MonoBehaviour
                     currentHighlight = interactable;
 
                     isHolding = true;
-                    Debug.Log($"Grabbed {heldObject.name}");
+                    //Debug.Log($"Grabbed {heldObject.name}");
                 }
             }
         }
@@ -127,7 +118,7 @@ public class ObjectGrabber : MonoBehaviour
     //releases object and resumes physics
     void DropObject()
     {
-        if (heldObject != null) return; //stop if we arent holding anything
+        //if (heldObject == null) return; //stop if we arent holding anything
 
         //re-enable gravity and rotation
         heldObject.useGravity = true;
@@ -135,7 +126,7 @@ public class ObjectGrabber : MonoBehaviour
 
         heldObject = null; //clear it
         isHolding = false;
-        Debug.Log("Dropped Object");
+        //Debug.Log("Dropped Object");
     }
 
     //releases obj with force
@@ -154,14 +145,19 @@ public class ObjectGrabber : MonoBehaviour
 
         heldObject = null;
         isHolding = false;
-        Debug.Log("Threw object");
+        //Debug.Log("Threw object");
     }
 
     public void OnGrabPerformed(InputAction.CallbackContext context)
     {
-        if (isHolding) DropObject();
+        
+        if (isHolding)
+        {
+            DropObject();
+            Debug.Log("drop:" + isHolding);
+        } 
         else TryGrab();
-
+        Debug.Log("grab: " + isHolding);
     }
 
     public void OnThrowPerformed(InputAction.CallbackContext context)
@@ -171,12 +167,25 @@ public class ObjectGrabber : MonoBehaviour
 
     public void OnToggleRotate(InputAction.CallbackContext context)
     {
-        if (heldObject != null && context.performed)
+        if(!context.performed)
+        {
+            rotating = false;
+            rotateSensitivity = 0;
+            heldObject.angularVelocity = Vector3.zero;
+            heldObject.linearVelocity = Vector3.zero;
+            heldObject.freezeRotation = true;
+        }
+        else if(heldObject != null)
         {
             rotating = true;
             heldObject.freezeRotation = false;
         }
-        else rotating = false;
+        //if (heldObject != null && context.performed)
+        //{
+        //    rotating = true;
+        //    heldObject.freezeRotation = false;
+        //}
+        //else rotating = false;
     }
 
     public void OnRotate(InputAction.CallbackContext context)
@@ -193,8 +202,10 @@ public class ObjectGrabber : MonoBehaviour
     {
         if(heldObject == null) return;
 
-        float mouseX = lookInput.x * lookSensitivity * Time.deltaTime;
-        float mouseY = lookInput.y * lookSensitivity * Time.deltaTime;
+        rotateSensitivity = GameObject.FindGameObjectWithTag("Player").GetComponent<FPSPlayer>().lookSensitivity;
+
+        float mouseX = lookInput.x * rotateSensitivity * Time.deltaTime;
+        float mouseY = lookInput.y * rotateSensitivity * Time.deltaTime;
 
         objectYaw += mouseX;
 
@@ -204,8 +215,9 @@ public class ObjectGrabber : MonoBehaviour
 
         if (!rotating)
         {
-            heldObject.freezeRotation = true;
+            rotateSensitivity = 0;
             heldObject.angularVelocity = Vector3.zero;
+            heldObject.freezeRotation = true;
         }
     }
 
@@ -227,12 +239,12 @@ public class ObjectGrabber : MonoBehaviour
                 if (currentHighlight != null && currentHighlight != interactable)
                 {
                     currentHighlight.UnHighlight();
-                    Debug.Log("unhighlighted");
+                    //Debug.Log("unhighlighted");
                 }
 
                 //highlight the new obj
                 interactable.Highlight();
-                Debug.Log("highlighted");
+                //Debug.Log("highlighted");
                 currentHighlight = interactable;
                 return;
             }
@@ -241,7 +253,7 @@ public class ObjectGrabber : MonoBehaviour
             if(currentHighlight != null)
             {
                 currentHighlight.UnHighlight();
-                Debug.Log("unhighlighted");
+                //Debug.Log("unhighlighted");
                 currentHighlight = null;
             }
     }
