@@ -76,4 +76,13 @@ public class PhysicsObject : MonoBehaviour
         //OnValidate runs in editor whenever an inspector value changes
         if(rb != null) ApplyRigidBodySettings();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.tag == "End")
+        {
+            Debug.Log($"{gameObject} destroyed");
+            Destroy(gameObject);
+        }
+    }
 }
