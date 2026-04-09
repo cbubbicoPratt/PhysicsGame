@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PegScript : MonoBehaviour
@@ -16,6 +17,8 @@ public class PegScript : MonoBehaviour
     private float lValue;
     private void Awake()
     {
+        int randScale = Random.Range(2, 6);
+        transform.localScale = new Vector3(randScale, randScale, randScale);
         pegMTL = GetComponent<Renderer>().material;
         currentColor = pegMTL.color;
         Color.RGBToHSV(currentColor, out hValue, out sValue, out lValue);
@@ -39,6 +42,8 @@ public class PegScript : MonoBehaviour
             Debug.Log($"Collided with {collision.collider}");
             
             transform.localScale += Vector3.one;
+            ScoreManager.UpdateScore(storedScore);
+            storedScore = storedScore / 2;
             increasedTimes++;
         }
     }
