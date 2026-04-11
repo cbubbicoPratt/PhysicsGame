@@ -1,4 +1,8 @@
+using System;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PhysicsObject : MonoBehaviour
 {
@@ -32,11 +36,19 @@ public class PhysicsObject : MonoBehaviour
     PhysicsMaterial physMat;
     public bool isHeld = false;
 
+    public static event Action OnEnd;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        rb.maxLinearVelocity = 100;
         ApplyRigidBodySettings();
         ApplySurfaceSettings();
+    }
+
+    private void Update()
+    {
+        Debug.Log(rb.linearVelocity.magnitude);
     }
 
     //sets mass and drag directly
@@ -83,6 +95,7 @@ public class PhysicsObject : MonoBehaviour
         {
             Debug.Log($"{gameObject} destroyed");
             Destroy(gameObject);
+            OnEnd?.Invoke();
         }
     }
 
