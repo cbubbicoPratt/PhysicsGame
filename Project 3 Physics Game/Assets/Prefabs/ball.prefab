@@ -106,10 +106,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhysicsObject
   mass: 0.4
-  drag: 0.2
-  angularDrag: 0.2
+  drag: 0
+  angularDrag: 0
   bounciness: 1
-  friction: 0.5
+  friction: 0.2
   puzzleWeight: -1
   isHeld: 0
 --- !u!114 &9081263881364582484

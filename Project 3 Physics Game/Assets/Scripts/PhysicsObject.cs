@@ -46,11 +46,6 @@ public class PhysicsObject : MonoBehaviour
         ApplySurfaceSettings();
     }
 
-    private void Update()
-    {
-        Debug.Log(rb.linearVelocity.magnitude);
-    }
-
     //sets mass and drag directly
     void ApplyRigidBodySettings()
     {

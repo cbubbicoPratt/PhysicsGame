@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using UnityEngine;
 
 public class PegScript : MonoBehaviour
@@ -8,16 +9,21 @@ public class PegScript : MonoBehaviour
     //halve stored amount
     //increase size
     //when peg grows big enough it "pops" and disappears
-    public int storedScore;
+    private int storedScore;
     private int increasedTimes = 0;
     private Material pegMTL;
     private Color currentColor;
     private float hValue;
     private float sValue;
     private float lValue;
+    private RoundManager roundManager;
+
+    public static event Action<int> onHit;
     private void Awake()
     {
-        int randScale = Random.Range(2, 6);
+        roundManager = UnityEngine.Object.FindFirstObjectByType<RoundManager>();
+        int randScale = UnityEngine.Random.Range(2, 6);
+        storedScore = (UnityEngine.Random.Range(roundManager.GetCurrentRound() * 1, roundManager.GetCurrentRound() * 128)) / randScale;
         transform.localScale = new Vector3(randScale, randScale, randScale);
         pegMTL = GetComponent<Renderer>().material;
         currentColor = pegMTL.color;
@@ -41,6 +47,7 @@ public class PegScript : MonoBehaviour
         {
             Debug.Log($"Collided with {collision.collider}");
 
+            onHit?.Invoke(storedScore);
             collision.rigidbody.AddForce(collision.rigidbody.linearVelocity * .25f, ForceMode.Impulse);
             transform.localScale += Vector3.one;
             ScoreManager.UpdateScore(storedScore);
