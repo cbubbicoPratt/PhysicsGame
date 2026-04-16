@@ -6,8 +6,9 @@ public class PegSpawner : MonoBehaviour
     private int spawnNumber;
     //stored prefab for peg
     public GameObject pegPrefab;
-    private Transform spawnCollider;
-    private Bounds spawnArea;
+    public GameObject area;
+    public Transform areaMin;
+    public Transform areaMax;
 
     private void OnEnable()
     {
@@ -21,14 +22,21 @@ public class PegSpawner : MonoBehaviour
     public void SpawnPegs()
     {
         spawnNumber = Random.Range(12, 30);
-        spawnCollider = GetComponent<Transform>();
-        spawnArea = new Bounds(spawnCollider.position, spawnCollider.localScale);
-        Vector3 randPos;
+        Vector3 targetPos;
+        //float x;
+        float offsetX;
+        float offsetY;
+        float offsetZ;
         for (int i = spawnNumber; i >= 0; i--)
         {
-            randPos = new Vector3(Random.Range(spawnArea.min.x, spawnArea.max.x), Random.Range(spawnArea.min.y, spawnArea.max.y), Random.Range(spawnArea.min.z, spawnArea.max.z));
-            GameObject thisPeg = Instantiate(pegPrefab, randPos, Quaternion.identity);
-            thisPeg.GetComponent<Renderer>().material.color = Random.ColorHSV();
+            //x = Random.Range(0f, 1f);
+            offsetX = Random.Range(-10f, 10f);
+            offsetY = Random.Range(-8.4f, 1.59f);
+            offsetZ = Random.Range(areaMin.transform.position.z, areaMax.transform.position.z);
+            targetPos = new Vector3(area.transform.position.x + offsetX, area.transform.position.y + offsetY, area.transform.position.z + offsetZ);
+            GameObject thisPeg = Instantiate(pegPrefab, targetPos, Quaternion.identity);
+            thisPeg.transform.SetParent(area.transform, true);
+            thisPeg.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1f);
         }
     }
 }
