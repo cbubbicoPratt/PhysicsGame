@@ -28,12 +28,10 @@ public class AddDecal : MonoBehaviour
     }
 
     public IEnumerator FloatUp(GameObject thisObj)
-    {
-        Color c = thisObj.GetComponent<TextMeshPro>().color;
+    { 
         for (float alpha = 1f; alpha >= 0; alpha -= 0.1f)
         {
-            c.a = alpha;
-            thisObj.GetComponent<TextMeshPro>().color = c;
+            thisObj.GetComponent<TextMeshPro>().alpha -= alpha;
             thisObj.GetComponent<Transform>().position += new Vector3(0, alpha * 10);
             yield return null;
         }

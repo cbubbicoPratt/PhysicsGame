@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class LifeManager : MonoBehaviour
@@ -33,7 +34,11 @@ public class LifeManager : MonoBehaviour
             currentLives += (roundManager.GetExcessScore() / 128);
             if (currentLives > maxLives) currentLives = maxLives;
         }
-        if(currentLives <= 0)  SceneManager.LoadScene("GameOver");
+        if (currentLives <= 0)
+        {
+            
+            SceneManager.LoadScene("GameOver");
+        }
         livesDisplay.text = "Lives: " + currentLives;
     }
 }

@@ -2132,6 +2132,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1302121230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1302121232}
+  - component: {fileID: 1302121231}
+  m_Layer: 0
+  m_Name: SpawnParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1302121231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302121230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e23ebb20ce1894da7c8858f1206dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PegSpawner
+  pegPrefab: {fileID: 6670872611600674578, guid: 03e8248887c74054f891f767a4c45974, type: 3}
+--- !u!4 &1302121232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302121230}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: -2.8656, z: 33.945}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!1 &1377004176
 GameObject:
   m_ObjectHideFlags: 0
@@ -2389,6 +2434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectSpawner
   prefabs:
   - {fileID: 2721227097389017720, guid: 3fd8cb921d7c7cb4ba3c67456c705ed7, type: 3}
+  - {fileID: 5688731285398745849, guid: fcac2bfa65f504c44a2c5c239936eb15, type: 3}
 --- !u!4 &1427857317
 Transform:
   m_ObjectHideFlags: 0
@@ -2805,37 +2851,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1616676812
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1616676813}
-  m_Layer: 0
-  m_Name: SpawnParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1616676813
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616676812}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: -2.8656, z: 33.945}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!1 &1711205619
 GameObject:
   m_ObjectHideFlags: 0
@@ -3026,7 +3041,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1805805137}
   - component: {fileID: 1805805136}
-  - component: {fileID: 1805805138}
   m_Layer: 0
   m_Name: SpawnArea
   m_TagString: Untagged
@@ -3070,22 +3084,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
---- !u!114 &1805805138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805805135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20e23ebb20ce1894da7c8858f1206dad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PegSpawner
-  pegPrefab: {fileID: 6670872611600674578, guid: 03e8248887c74054f891f767a4c45974, type: 3}
-  area: {fileID: 1616676812}
-  areaMin: {fileID: 245835083}
-  areaMax: {fileID: 275435715}
 --- !u!1 &1809577545
 GameObject:
   m_ObjectHideFlags: 0
@@ -3463,8 +3461,8 @@ SceneRoots:
   - {fileID: 564936196}
   - {fileID: 685851925}
   - {fileID: 2075976660}
+  - {fileID: 1302121232}
   - {fileID: 1805805137}
-  - {fileID: 1616676813}
   - {fileID: 1711205621}
   - {fileID: 245835083}
   - {fileID: 275435715}
