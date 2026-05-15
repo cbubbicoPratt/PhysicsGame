@@ -827,7 +827,6 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!1 &930979520
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,8 +1028,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   eventThreshold: 5
-=======
->>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
@@ -1305,7 +1302,6 @@ MonoBehaviour:
   highlightStrength: 0.4
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!114 &1237311608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1414,8 +1410,6 @@ Transform:
   - {fileID: 1779399103}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
->>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
@@ -2085,13 +2079,10 @@ SceneRoots:
   - {fileID: 1943068660}
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
   - {fileID: 1284656288}
   - {fileID: 1016149047}
   - {fileID: 84024835}
   - {fileID: 930979522}
-=======
->>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
