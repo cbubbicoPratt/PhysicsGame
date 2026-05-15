@@ -150,8 +150,8 @@ public class ObjectGrabber : MonoBehaviour
 
     public void OnGrabPerformed(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;   
-        if (isHolding && context.performed)
+        
+        if (isHolding)
         {
             DropObject();
             Debug.Log("drop:" + isHolding);

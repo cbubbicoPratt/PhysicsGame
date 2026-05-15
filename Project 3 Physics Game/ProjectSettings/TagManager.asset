@@ -3,9 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - Launched
-  - End
+  tags: []
   layers:
   - Default
   - TransparentFX
