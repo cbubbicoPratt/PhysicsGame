@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Launched
   - End
-  - Peg
   layers:
   - Default
   - TransparentFX
