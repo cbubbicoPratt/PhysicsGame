@@ -40,8 +40,7 @@ public class PegScript : MonoBehaviour
         if(collision.collider.tag == "Launched")
         {
             Debug.Log($"Collided with {collision.collider}");
-
-            collision.rigidbody.AddForce(collision.rigidbody.linearVelocity * .25f, ForceMode.Impulse);
+            
             transform.localScale += Vector3.one;
             ScoreManager.UpdateScore(storedScore);
             storedScore = storedScore / 2;
