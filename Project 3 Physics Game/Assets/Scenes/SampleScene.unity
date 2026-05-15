@@ -829,9 +829,6 @@ Transform:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 8b74907 (trying to revert)
 --- !u!1 &930979520
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,13 +1034,10 @@ MonoBehaviour:
 >>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
-<<<<<<< HEAD
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
-=======
->>>>>>> parent of 8b74907 (trying to revert)
 --- !u!1 &1113587982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,9 +1310,6 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 8b74907 (trying to revert)
 --- !u!114 &1237311608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1431,13 +1422,10 @@ Transform:
 >>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
-<<<<<<< HEAD
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
-=======
->>>>>>> parent of 8b74907 (trying to revert)
 --- !u!1 &1400549917
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,9 +2093,6 @@ SceneRoots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 8b74907 (trying to revert)
   - {fileID: 1284656288}
   - {fileID: 1016149047}
   - {fileID: 84024835}
@@ -2116,10 +2101,7 @@ SceneRoots:
 >>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
-<<<<<<< HEAD
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
 =======
 >>>>>>> parent of 43faac7 (Did hinge stuff)
-=======
->>>>>>> parent of 8b74907 (trying to revert)
