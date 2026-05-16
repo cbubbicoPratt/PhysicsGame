@@ -7,16 +7,10 @@ public class PegSpawner : MonoBehaviour
     //stored prefab for peg
     public GameObject pegPrefab;
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
     private Transform spawnCollider;
     private Bounds spawnArea;
 >>>>>>> parent of 7b513ab (Plahytested, tweaked pegs but they still spawn out of bounds :/)
-=======
-    public GameObject area;
-    public Transform areaMin;
-    public Transform areaMax;
->>>>>>> parent of e8a8b4a (Fixed Peg issues, added color and made horse ball)
 
     private void OnEnable()
     {
@@ -36,7 +30,6 @@ public class PegSpawner : MonoBehaviour
         for (int i = spawnNumber; i >= 0; i--)
         {
 <<<<<<< HEAD
-<<<<<<< HEAD
 
             //x = Random.Range(0f, 1f);
             offsetX = Random.Range(-10f, 10f);
@@ -50,16 +43,6 @@ public class PegSpawner : MonoBehaviour
             GameObject thisPeg = Instantiate(pegPrefab, randPos, Quaternion.identity);
             thisPeg.GetComponent<Renderer>().material.color = Random.ColorHSV();
 >>>>>>> parent of 7b513ab (Plahytested, tweaked pegs but they still spawn out of bounds :/)
-=======
-            //x = Random.Range(0f, 1f);
-            offsetX = Random.Range(-10f, 10f);
-            offsetY = Random.Range(-8.4f, 1.59f);
-            offsetZ = Random.Range(areaMin.transform.position.z, areaMax.transform.position.z);
-            targetPos = new Vector3(area.transform.position.x + offsetX, area.transform.position.y + offsetY, area.transform.position.z + offsetZ);
-            GameObject thisPeg = Instantiate(pegPrefab, targetPos, Quaternion.identity);
-            thisPeg.transform.SetParent(area.transform, true);
-            thisPeg.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1f);
->>>>>>> parent of e8a8b4a (Fixed Peg issues, added color and made horse ball)
         }
     }
 }

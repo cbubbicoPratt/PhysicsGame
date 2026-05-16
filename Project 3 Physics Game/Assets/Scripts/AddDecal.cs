@@ -29,7 +29,6 @@ public class AddDecal : MonoBehaviour
 
     public IEnumerator FloatUp(GameObject thisObj)
 <<<<<<< HEAD
-<<<<<<< HEAD
     { 
         for (float alpha = 1f; alpha >= 0; alpha -= 0.1f)
         {
@@ -42,14 +41,6 @@ public class AddDecal : MonoBehaviour
             c.a = alpha;
             thisObj.GetComponent<Renderer>().material.color = c;
 >>>>>>> parent of 7b513ab (Plahytested, tweaked pegs but they still spawn out of bounds :/)
-=======
-    {
-        Color c = thisObj.GetComponent<TextMeshPro>().color;
-        for (float alpha = 1f; alpha >= 0; alpha -= 0.1f)
-        {
-            c.a = alpha;
-            thisObj.GetComponent<TextMeshPro>().color = c;
->>>>>>> parent of e8a8b4a (Fixed Peg issues, added color and made horse ball)
             thisObj.GetComponent<Transform>().position += new Vector3(0, alpha * 10);
             yield return null;
         }

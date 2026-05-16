@@ -22,12 +22,13 @@ public class PegScript : MonoBehaviour
     private void Awake()
     {
         roundManager = UnityEngine.Object.FindFirstObjectByType<RoundManager>();
-        int randScale = UnityEngine.Random.Range(2, 6);
-        storedScore = (UnityEngine.Random.Range(roundManager.GetCurrentRound() * 1, roundManager.GetCurrentRound() * 128)) / randScale;
+        GetComponent<Renderer>().material.color = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), 1f);
+        int randScale = UnityEngine.Random.Range(4, 6);
+        storedScore = (UnityEngine.Random.Range(roundManager.GetCurrentRound() * 256, roundManager.GetCurrentRound() * 512)) / randScale;
         transform.localScale = new Vector3(randScale, randScale, randScale);
         pegMTL = GetComponent<Renderer>().material;
         currentColor = pegMTL.color;
-        Color.RGBToHSV(currentColor, out hValue, out sValue, out lValue);
+        //Color.RGBToHSV(currentColor, out hValue, out sValue, out lValue);
     }
     private void Update()
     {
@@ -41,8 +42,9 @@ public class PegScript : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.collider.tag);
-        hValue += 0.1f;
-        currentColor = Color.HSVToRGB(hValue, sValue, lValue);
+        currentColor = new Color(currentColor.r + .25f, currentColor.g -.25f, currentColor.b - .25f);
+        //hValue += 0.1f;
+        //currentColor = Color.HSVToRGB(hValue, sValue, lValue);
         if(collision.collider.tag == "Launched")
         {
             Debug.Log($"Collided with {collision.collider}");

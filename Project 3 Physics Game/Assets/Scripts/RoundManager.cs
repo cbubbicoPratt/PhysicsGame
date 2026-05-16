@@ -7,8 +7,8 @@ public class RoundManager : MonoBehaviour
     //we want rounds for each randomized set of pegs
     //score requirement = current round * 64 + (excess points from last round / 2)
     private int currentRound = 1;
-    private int scoreRequirement;
     private int excessScore = 0;
+    private int scoreRequirement = 256;
 
     public TextMeshProUGUI roundDisplay;
     public static event Action onUpdate;
@@ -20,7 +20,6 @@ public class RoundManager : MonoBehaviour
 
     private void Update()
     {
-        scoreRequirement = currentRound * 256 + (excessScore / 2);
         roundDisplay.text = "Round: " + currentRound;
     }
 
@@ -30,11 +29,16 @@ public class RoundManager : MonoBehaviour
         {
             currentRound++;
             excessScore = ScoreManager.GetScore() - scoreRequirement;
+            foreach (GameObject thisObj in GameObject.FindGameObjectsWithTag("Peg"))
+            {
+                Destroy(thisObj);
+            }
             onUpdate?.Invoke();
+            scoreRequirement += currentRound * 256 + (excessScore / 2);
         }
     }
 
-    
+
     public int GetCurrentRound() { return currentRound; }
     //called by ScoreManager to display the needed score
     public int GetScoreReq() { return scoreRequirement; }
