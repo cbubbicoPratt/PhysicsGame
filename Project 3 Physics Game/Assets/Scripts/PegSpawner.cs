@@ -8,17 +8,7 @@ public class PegSpawner : MonoBehaviour
     public GameObject pegPrefab;
     private Transform spawnCollider;
     private Bounds spawnArea;
-
-    private void OnEnable()
-    {
-        RoundManager.onUpdate += SpawnPegs;
-    }
     private void Start()
-    {
-        SpawnPegs();
-    }
-
-    public void SpawnPegs()
     {
         spawnNumber = Random.Range(12, 30);
         spawnCollider = GetComponent<Transform>();

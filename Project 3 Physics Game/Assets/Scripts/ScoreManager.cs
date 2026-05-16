@@ -7,28 +7,14 @@ public class ScoreManager : MonoBehaviour
     //function to update
     public TextMeshProUGUI scoreText;
     public static int score = 0;
-    private RoundManager roundManager;
-
-    private void OnEnable()
-    {
-        RoundManager.onUpdate += ResetScore;
-    }
-    private void Awake()
-    {
-        roundManager = Object.FindFirstObjectByType<RoundManager>();
-    }
 
     private void Update()
     {
-        scoreText.text = "Score: " + score + "/" + roundManager.GetScoreReq();
+        scoreText.text = "Score: " + score;
     }
 
     public static void UpdateScore(int addScore)
     {
         score += addScore;
     }
-
-    public static int GetScore() { return score; }
-
-    public static void ResetScore(){ score = 0; }
 }
