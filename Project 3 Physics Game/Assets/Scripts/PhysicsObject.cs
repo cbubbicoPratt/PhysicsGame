@@ -85,11 +85,4 @@ public class PhysicsObject : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    public float GetWeight()
-    {
-        if (puzzleWeight >= 0) return puzzleWeight;
-
-        return mass;
-    }
 }
